@@ -129,20 +129,8 @@
                     <div class="row gy-4">
                         <div class="col-md-4">
                             <div class="bg-light d-flex flex-column justify-content-center p-4">
-                                <h5 class="text-uppercase">// Booking //</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>book@example.com</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light d-flex flex-column justify-content-center p-4">
                                 <h5 class="text-uppercase">// General //</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>info@example.com</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="bg-light d-flex flex-column justify-content-center p-4">
-                                <h5 class="text-uppercase">// Technical //</h5>
-                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>tech@example.com</p>
+                                <p class="m-0"><i class="fa fa-envelope-open text-primary me-2"></i>info@avanthimotors.com</p>
                             </div>
                         </div>
                     </div>
@@ -156,37 +144,49 @@
                 <div class="col-md-6">
                     <div class="wow fadeInUp" data-wow-delay="0.2s">
                         <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        <form>
+                        <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+
+                            <!-- Replace with your Access Key -->
+                            <input type="hidden" name="access_key" value="a4575b2c-4155-4fee-9cea-397e7912978e">
+                        
+                            <!-- Form Inputs. Each input must have a name="" attribute -->
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone Number" required>
+                                        <label for="phone">Your Phone Number</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                                         <label for="subject">Subject</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                        <textarea class="form-control" name="message" id="message" placeholder="Leave a message here" style="height: 100px" required></textarea>
                                         <label for="message">Message</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                    <!-- hCaptcha Spam Protection -->
+                                    <div class="h-captcha" data-captcha="true"></div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 py-3">Send Message</button>
                                 </div>
                             </div>
+                        
                         </form>
+                        <!-- Required for hCaptcha -->
+                        <script src="https://web3forms.com/client/script.js" async defer></script>
                     </div>
                 </div>
             </div>
@@ -270,6 +270,21 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <!-- Client Side hCaptcha Validation Javascript -->
+    <script>
+        const form = document.getElementById('contactForm');
+    
+        form.addEventListener('submit', function(e) {
+            const hCaptcha = form.querySelector('.h-captcha > textarea').value;
+    
+            if (!hCaptcha) {
+                e.preventDefault();
+                alert("Please complete the captcha field.");
+                return;
+            }
+        });
+    </script>
+    
 </body>
 
 </html>
