@@ -105,6 +105,13 @@
             }
         }
     });
-    
+
+    //SliderContainer
+    const customContainers = document.querySelectorAll('.custom-container');
+    customContainers.forEach(customContainer => {
+        customContainer.querySelector('.slider').addEventListener('input', (e) => {
+            customContainer.style.setProperty('--position', `${e.target.value}%`);
+  })
+})
 })(jQuery);
 
